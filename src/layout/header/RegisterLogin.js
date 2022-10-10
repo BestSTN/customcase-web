@@ -5,28 +5,26 @@ import RegisterForm from "./RegisterForm";
 const RegisterLogin = () => {
   return (
     <>
-      <div className="btn-group" role="group">
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#registerModal"
-        >
-          Register
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#loginModal"
-        >
-          Login
-        </button>
-      </div>
-      <Modal title="Login" id='loginModal'>
+      <button
+        type="button"
+        className="btn btn-outline-primary me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#loginModal"
+      >
+        Login
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#registerModal"
+      >
+        Sign-up
+      </button>
+      <Modal title="Login" id="loginModal">
         <LoginForm />
       </Modal>
-      <Modal title="Register" id='registerModal'>
+      <Modal title="Sign-up" id="registerModal">
         <RegisterForm />
       </Modal>
     </>

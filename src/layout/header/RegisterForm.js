@@ -85,10 +85,10 @@ const RegisterForm = () => {
           onChange={handleChangeInput}
         />
       </div>
-      <div className="d-flex justify-content-center">
+      <div className="mb-2 d-grid">
         <button
           type="submit"
-          className="btn d-flex justify-content-center align-items-center btn-primary text-4.5 h-9 tw-px-10"
+          className="btn btn-primary fw-bold rounded-md h-12 text-4.5"
           data-dismiss="modal"
         >
           Sign Up
