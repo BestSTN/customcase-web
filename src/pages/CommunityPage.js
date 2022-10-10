@@ -1,4 +1,5 @@
-import ProductContainer from "../features/ProductContainer";
+import { Link } from "react-router-dom";
+import ProductContainer from "../features/product/ProductContainer";
 
 const CommunityPage = () => {
   return (
@@ -14,12 +15,12 @@ const CommunityPage = () => {
               accusantium id provident.
             </p>
             <p>
-              <a href="#" className="btn btn-primary my-2">
+              <Link to="#" className="btn btn-primary my-2">
                 Main call to action
-              </a>
-              <a href="#" className="btn btn-secondary my-2">
+              </Link>
+              <Link to="#" className="btn btn-secondary my-2">
                 Secondary action
-              </a>
+              </Link>
             </p>
           </div>
         </div>

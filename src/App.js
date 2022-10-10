@@ -2,6 +2,7 @@ import Router from "./route/Router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetMe } from "./redux/authSlice";
+import { getAllProduct } from "./redux/productSlice";
 import { ToastContainer } from "react-toastify";
 import Spinner from "./components/Spinner";
 
@@ -11,6 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(thunkGetMe());
+    dispatch(getAllProduct());
   }, [dispatch]);
 
   if (initialLoading) return <Spinner />;

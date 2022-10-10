@@ -17,17 +17,17 @@ function Footer() {
           <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li className="ms-3">
               <Link className="text-muted" to="/">
-                <i class="fa-brands fa-twitter fs-4"></i>
+                <i className="fa-brands fa-twitter fs-4"></i>
               </Link>
             </li>
             <li className="ms-3">
               <Link className="text-muted" to="/">
-                <i class="fa-brands fa-instagram fs-4"></i>
+                <i className="fa-brands fa-instagram fs-4"></i>
               </Link>
             </li>
             <li className="ms-3">
               <Link className="text-muted" to="/">
-                <i class="fa-brands fa-facebook fs-4"></i>
+                <i className="fa-brands fa-facebook fs-4"></i>
               </Link>
             </li>
           </ul>
