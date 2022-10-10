@@ -1,6 +1,6 @@
-const Modal = ({ title, children }) => {
+const Modal = ({ title, children , id }) => {
   return (
-    <div className="modal fade" id="myModal" tabIndex="-1">
+    <div className="modal fade" id={id} tabIndex="-1">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">

@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Avatar from "../components/Avatar";
-import MenuItem from "./header/MenuItem";
-import RegisterLogin from "./header/RegisterLogin";
-import { logout } from "../redux/authSlice";
+import Avatar from "../../components/Avatar";
+import MenuItem from "./MenuItem";
+import RegisterLogin from "./RegisterLogin";
+import { logout } from "../../redux/authSlice";
 
 function Header() {
   const { pathname } = useLocation();
@@ -34,12 +34,17 @@ function Header() {
           {user ? (
             <div className="nav-item dropdown">
               <div className="" role="button" data-bs-toggle="dropdown">
-                <Avatar size="40" />
+                <Avatar size="40" src={user.profileImage} />
               </div>
               <ul className="dropdown-menu dropdown-menu-end px-2 mt-1 border shadow-sm ">
                 <li>
                   <Link className="dropdown-item" to={`/profile/${user.id}`}>
-                    See your profile
+                    <div className="d-flex flex-column">
+                      <span className="text-black fw-bold">
+                        {user.firstName} {user.lastName}
+                      </span>
+                      <small className="text-muted">See your profile</small>
+                    </div>
                   </Link>
                 </li>
                 <li>

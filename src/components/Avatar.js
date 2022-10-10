@@ -8,6 +8,7 @@ function Avatar({ src, size, borderSize, borderColor }) {
     <img
       src={src || profileImage}
       className={`rounded-circle cursor-pointer${classes}`}
+      style={{ objectFit: "cover" }}
       width={size}
       height={size}
       alt="user"

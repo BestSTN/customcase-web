@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import * as authService from "../api/authApi";
+import { API_ENDPOINT_URL } from "../config/env";
 import {
   addAccessToken,
   getAccessToken,
@@ -13,6 +14,7 @@ const authSlice = createSlice({
   reducers: {
     getMe: (state, action) => {
       state.user = action.payload;
+      state.user.profileImage = API_ENDPOINT_URL + state.user.profileImage
     },
     logout: (state, action) => {
       state.user = null;
@@ -48,6 +50,18 @@ export const login = (input) => async (dispatch) => {
     const resMe = await authService.getMe();
     dispatch(getMe(resMe.data.user));
     toast.success("success login");
+  } catch (err) {
+    toast.error(err.response.data.message);
+  }
+};
+
+export const register = (input) => async (dispatch) => {
+  try {
+    const res = await authService.register(input);
+    addAccessToken(res.data.token);
+    const resMe = await authService.getMe();
+    setTimeout(() => dispatch(getMe(resMe.data.user)), 1);
+    toast.success("success register");
   } catch (err) {
     toast.error(err.response.data.message);
   }
