@@ -8,6 +8,7 @@ import ProfileIcon from "./ProfileIcon";
 function Header() {
   const { pathname } = useLocation();
   const user = useSelector((state) => state.auth.user);
+  const cart = useSelector((state) => state.order.cart);
 
   return (
     <div className="d-flex w-100 shadow">
@@ -40,7 +41,9 @@ function Header() {
                 <MenuItem to="/cart" active={pathname === "/cart"}>
                   Shopping Cart
                   <i className="fa-solid fa-cart-shopping cart ms-1">
-                    <span>2</span>
+                    {!!cart.orderItems.length && (
+                      <span>{cart.orderItems.length}</span>
+                    )}
                   </i>
                 </MenuItem>
               </li>

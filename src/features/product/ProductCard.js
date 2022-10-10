@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { API_ENDPOINT_URL } from "../../config/env";
 import { deleteProduct } from "../../redux/productSlice";
+import { addToCart } from "../../redux/orderSlice";
 
 const ProductCard = ({
   product: { id, name, thumbnail, price, User: user, Model: model },
 }) => {
   const me = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleClickDeleted = () => {
-    dispatch(deleteProduct(id))
+    dispatch(deleteProduct(id));
+  };
+
+  const handleClickAdd = () => {
+    dispatch(addToCart({ productId: id, price, amount: 1 }));
   };
 
   return (
@@ -27,7 +32,6 @@ const ProductCard = ({
         <div
           style={{ height: "225px" }}
           className="d-flex justify-content-center bd-placeholder-img card-img-top"
-   
         >
           <img
             style={{ objectFit: "cover", height: "100%" }}
@@ -51,7 +55,11 @@ const ProductCard = ({
               </small>
             </Link>
 
-            <button type="button" className="btn btn-sm btn-outline-secondary">
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-secondary"
+              onClick={handleClickAdd}
+            >
               Add to Cart
             </button>
           </div>

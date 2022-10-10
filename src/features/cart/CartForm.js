@@ -1,13 +1,49 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addAddress, createOrder } from "../../redux/orderSlice";
+
 const CartForm = () => {
+  const user = useSelector((state) => state.auth.user);
+  const cart = useSelector((state) => state.order.cart);
+
+  const total = cart.orderItems.reduce((a, c) => a + c.price * c.amount, 0);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(addAddress(user.address));
+  }, [dispatch, user.address]);
+
+  const handleChangeInput = (e) => {
+    dispatch(addAddress(e.target.value));
+  };
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    try {
+      if (!cart.address || !cart.address.trim()) {
+        return toast.error("address is required");
+      }
+
+      if (cart.orderItems.length === 0) {
+        return toast.error("cart is empty");
+      }
+
+      dispatch(createOrder(cart));
+    } catch (err) {
+      toast.error(err.response?.data.message);
+    }
+  };
+
   return (
     <div className="col-4 border-start">
       <h5>Summary</h5>
       <hr />
       <div className="d-flex justify-content-between mb-3">
-        <div className="text-muted">ITEMS 3</div>
-        <div className="text-muted  ">฿ 132.00</div>
+        <div className="text-muted">ITEMS {cart.orderItems.length}</div>
+        <div className="text-muted">฿ {total}</div>
       </div>
-      <form>
+      <form onSubmit={handleSubmitForm}>
         <div className="mb-3">
           <label htmlFor="address" className="form-label">
             Address
@@ -18,8 +54,8 @@ const CartForm = () => {
             id="address"
             name="address"
             rows="3"
-            // value={input.name}
-            // onChange={handleChangeInput}
+            value={cart.address}
+            onChange={handleChangeInput}
           />
         </div>
 
@@ -48,12 +84,14 @@ const CartForm = () => {
             <option className="text-muted">KBank</option>
           </select>
         </div>
+        <div className="d-flex justify-content-between border-top py-3 fw-bold">
+          <div className="">TOTAL PRICE</div>
+          <div className="">฿ {total}</div>
+        </div>
+        <button type="submit" className="btn btn-primary w-100">
+          CHECKOUT
+        </button>
       </form>
-      <div className="d-flex justify-content-between border-top py-3 fw-bold">
-        <div className="">TOTAL PRICE</div>
-        <div className="">฿ 137.00</div>
-      </div>
-      <button className="btn btn-primary w-100">CHECKOUT</button>
     </div>
   );
 };

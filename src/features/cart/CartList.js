@@ -1,12 +1,14 @@
+import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 
 const CartList = () => {
+  const cart = useSelector((state) => state.order.cart);
   return (
-    <div>
-      <CartItem />
-      <CartItem />
-      <CartItem />
-    </div>
+    <>
+      {cart.orderItems.map((item) => (
+        <CartItem key={item.id} orderItem={item}/>
+      ))}
+    </>
   );
 };
 
