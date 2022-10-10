@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Router from "./route/Router";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkGetMe } from "./redux/authSlice";
+import { ToastContainer } from "react-toastify";
+import Spinner from "./components/Spinner";
 
 function App() {
+  const initialLoading = useSelector((state) => state.auth.initialLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(thunkGetMe());
+  }, [dispatch]);
+
+  if (initialLoading) return <Spinner />;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router />
+      <ToastContainer
+        autoClose="5000"
+        theme="colored"
+        position="bottom-center"
+      />
+    </>
   );
 }
 
