@@ -18,9 +18,6 @@ const CommunityPage = () => {
               <Link to="#" className="btn btn-primary my-2">
                 Main call to action
               </Link>
-              <Link to="#" className="btn btn-secondary my-2">
-                Secondary action
-              </Link>
             </p>
           </div>
         </div>

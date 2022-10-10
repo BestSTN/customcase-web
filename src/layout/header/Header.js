@@ -14,31 +14,37 @@ function Header() {
       <div className="container ">
         <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom ">
           <Link
-            href="/"
+            to="/"
             className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
           >
             <span className="fs-4">CustomeCase</span>
           </Link>
           <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li>
-              {" "}
               <MenuItem to="/" active={pathname === "/"}>
-                {" "}
-                Home{" "}
+                Home
               </MenuItem>
             </li>
             <li>
-              {" "}
               <MenuItem to="/design" active={pathname === "/design"}>
                 Design
               </MenuItem>
             </li>
             <li>
-              {" "}
               <MenuItem to="/community" active={pathname === "/community"}>
                 Community
               </MenuItem>
             </li>
+            {user && (
+              <li>
+                <MenuItem to="/cart" active={pathname === "/cart"}>
+                  Shopping Cart
+                  <i className="fa-solid fa-cart-shopping cart ms-1">
+                    <span>2</span>
+                  </i>
+                </MenuItem>
+              </li>
+            )}
           </ul>
 
           <div className="col-md-3 text-end">
