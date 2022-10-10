@@ -40,7 +40,7 @@ const ProductCard = ({
           <h5 className="card-text">{name}</h5>
           <div className="d-flex row card-text mb-3">
             <span className="text-muted">{`model: ${model.name}`}</span>
-            <span className="text-muted">{`price: ${price}`}</span>
+            <span className="text-muted">{`price: ${price} ฿`}</span>
           </div>
 
           <div className="d-flex justify-content-between align-items-center">
