@@ -1,8 +1,6 @@
-import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard";
 
-const ProductContainer = () => {
-  const products = useSelector((state) => state.product.products);
+const ProductContainer = ({ products }) => {
   return (
     <div className="album py-5 bg-light">
       <div className="container">

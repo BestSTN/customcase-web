@@ -9,6 +9,10 @@ const CartForm = () => {
 
   const total = cart.orderItems.reduce((a, c) => a + c.price * c.amount, 0);
 
+  if (!user) {
+    window.location.replace('/')
+  }
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(addAddress(user.address));

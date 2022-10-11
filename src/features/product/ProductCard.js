@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { API_ENDPOINT_URL } from "../../config/env";
 import { deleteProduct } from "../../redux/productSlice";
 import { addToCart } from "../../redux/orderSlice";
+import { toast } from "react-toastify";
 
 const ProductCard = ({
   product: { id, name, thumbnail, price, User: user, Model: model },
@@ -16,6 +17,9 @@ const ProductCard = ({
   };
 
   const handleClickAdd = () => {
+    if (!me) {
+     return toast.error('Please login to continue')
+    }
     dispatch(addToCart({ productId: id, price, amount: 1 }));
   };
 

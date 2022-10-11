@@ -61,10 +61,12 @@ const DesignForm = ({ input, handleSubmit, handleChangeInput }) => {
           Price
         </label>
         <input
-          type="text"
+          type="number"
           className="form-control"
           id="price"
           name="price"
+          min='100'
+          placeHolder='commission cost ฿ 100'
           value={input.price}
           onChange={handleChangeInput}
         />

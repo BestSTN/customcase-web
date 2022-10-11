@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import ProductContainer from "../features/product/ProductContainer";
 
 const CommunityPage = () => {
+  const products = useSelector((state) => state.product.products);
+
   return (
     <div>
       <section className="py-5 text-center container">
@@ -22,7 +26,7 @@ const CommunityPage = () => {
           </div>
         </div>
       </section>
-      <ProductContainer />
+      <ProductContainer products={products} />
     </div>
   );
 };
