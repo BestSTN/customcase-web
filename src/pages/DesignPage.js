@@ -11,7 +11,7 @@ const DesignPage = () => {
     name: "iphone14",
     price: "300",
     description: "",
-    modelId: 2,
+    modelId: 1,
     image: null,
     thumbnail: null,
   });
@@ -55,7 +55,7 @@ const DesignPage = () => {
       setInput({
         name: "iphone14",
         price: "300",
-        modelId: 2,
+        modelId: 1,
         image: null,
         thumbnail: null,
       });
