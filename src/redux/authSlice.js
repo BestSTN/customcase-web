@@ -14,7 +14,9 @@ const authSlice = createSlice({
   reducers: {
     getMe: (state, action) => {
       state.user = action.payload;
-      state.user.profileImage = API_ENDPOINT_URL + state.user.profileImage
+      if (state.user.profileImage) {
+        state.user.profileImage = API_ENDPOINT_URL + state.user.profileImage;
+      }
     },
     logout: (state, action) => {
       state.user = null;

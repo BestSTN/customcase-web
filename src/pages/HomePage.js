@@ -31,7 +31,7 @@ function Home() {
               Learn more
             </Link>
             <Link
-              to="/community"
+              to="/design"
               type="button"
               className="btn btn-outline-secondary btn-lg px-4"
             >

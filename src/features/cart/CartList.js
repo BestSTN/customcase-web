@@ -6,7 +6,7 @@ const CartList = () => {
   return (
     <>
       {cart.orderItems.map((item) => (
-        <CartItem key={item.id} orderItem={item}/>
+        <CartItem key={item.productId} orderItem={item}/>
       ))}
     </>
   );

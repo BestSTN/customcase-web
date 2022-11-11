@@ -17,12 +17,23 @@ const productSlice = createSlice({
     addProduct: (state, action) => {
       state.products.unshift(action.payload);
     },
+    updateProduct: (state, action) => {
+      const idx = state.products.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (idx >= 0) {
+        state.products.splice(idx, 1, action.payload);
+      } else {
+        state.products.unshift(action.payload);
+      }
+    },
   },
 });
 
 export default productSlice.reducer;
 
-export const { loadProduct, removeProduct, addProduct } = productSlice.actions;
+export const { loadProduct, removeProduct, addProduct, updateProduct } =
+  productSlice.actions;
 
 export const getAllProduct = () => async (dispatch) => {
   try {
@@ -38,10 +49,6 @@ export const createProduct = (input) => async (dispatch) => {
     const res = await productService.createProduct(input);
     dispatch(addProduct(res.data.product));
     toast.success("success create product");
-
-    setTimeout(() => {
-      window.location.replace("/community");
-    }, 1500);
   } catch (err) {
     toast.error(err.response.data.message);
   }
@@ -52,6 +59,16 @@ export const deleteProduct = (id) => async (dispatch) => {
     await productService.deleteProduct(id);
     await dispatch(removeProduct(id));
     toast.success("success delete product");
+  } catch (err) {
+    toast.error(err.response.data.message);
+  }
+};
+
+export const editProduct = (input, id) => async (dispatch) => {
+  try {
+    const res = await productService.updateProduct(input, id);
+    await dispatch(updateProduct(res.data.product));
+    toast.success("success update product");
   } catch (err) {
     toast.error(err.response.data.message);
   }

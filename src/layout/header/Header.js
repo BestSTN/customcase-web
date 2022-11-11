@@ -36,6 +36,7 @@ function Header() {
                 Community
               </MenuItem>
             </li>
+
             {user && (
               <li>
                 <MenuItem to="/cart" active={pathname === "/cart"}>
@@ -45,6 +46,14 @@ function Header() {
                       <span>{cart.orderItems.length}</span>
                     )}
                   </i>
+                </MenuItem>
+              </li>
+            )}
+
+            {user?.role === "ADMIN" && (
+              <li>
+                <MenuItem to="/admin" active={pathname === "/admin"}>
+                  <span className="text-danger fw-bold">ADMIN</span>
                 </MenuItem>
               </li>
             )}

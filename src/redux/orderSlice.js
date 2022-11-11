@@ -46,6 +46,14 @@ const orderSlice = createSlice({
 
       state.cart.orderItems = newOrderItems.filter((item) => item.amount !== 0);
     },
+    removeCart: (state, action) => {
+      state.cart = { address: "", orderItems: [] };
+    },
+    updateOrder: (state, action) => {
+      state.orders = state.orders.map((item) =>
+        item.id === action.payload.id ? action.payload : item
+      );
+    },
   },
 });
 
@@ -58,7 +66,18 @@ export const {
   addAddress,
   increaseAmount,
   decreaseAmount,
+  removeCart,
+  updateOrder,
 } = orderSlice.actions;
+
+export const getAllOrders = () => async (dispatch) => {
+  try {
+    const res = await orderService.getAllOrder();
+    dispatch(loadOrder(res.data.orders));
+  } catch (err) {
+    toast.error(err.response.data.message);
+  }
+};
 
 export const addToCart = (input) => async (dispatch) => {
   try {
@@ -91,10 +110,17 @@ export const createOrder = (input) => async (dispatch) => {
     await dispatch(addOrder(res.data.order));
 
     toast.success("success create order");
+    await dispatch(removeCart());
+  } catch (err) {
+    toast.error(err.response.data.message);
+  }
+};
 
-    setTimeout(() => {
-      window.location.replace("/community");
-    }, 1500);
+export const updateOrderTransaction = (id) => async (dispatch) => {
+  try {
+    const res = await orderService.updateOrderTransaction(id);
+    await dispatch(updateOrder(res.data.order));
+    toast.success("success update order");
   } catch (err) {
     toast.error(err.response.data.message);
   }

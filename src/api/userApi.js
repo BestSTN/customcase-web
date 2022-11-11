@@ -6,4 +6,4 @@ export const getUserOrder = () => axios.get("/users/orders");
 
 export const updateOrderDelivery = (id) => axios.patch(`/users/orders/${id}`);
 
-export const updateUser = () => axios.patch("/users/");
+export const updateUser = (input) => axios.patch("/users/", input);

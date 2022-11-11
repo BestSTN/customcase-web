@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addAddress, createOrder } from "../../redux/orderSlice";
 
@@ -7,10 +8,12 @@ const CartForm = () => {
   const user = useSelector((state) => state.auth.user);
   const cart = useSelector((state) => state.order.cart);
 
+  const navigate = useNavigate();
+
   const total = cart.orderItems.reduce((a, c) => a + c.price * c.amount, 0);
 
   if (!user) {
-    window.location.replace('/')
+    window.location.replace("/");
   }
 
   const dispatch = useDispatch();
@@ -34,6 +37,7 @@ const CartForm = () => {
       }
 
       dispatch(createOrder(cart));
+      navigate("/community");
     } catch (err) {
       toast.error(err.response?.data.message);
     }

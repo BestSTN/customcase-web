@@ -2,23 +2,19 @@ import Avatar from "../../components/Avatar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { API_ENDPOINT_URL } from "../../config/env";
-import { deleteProduct } from "../../redux/productSlice";
 import { addToCart } from "../../redux/orderSlice";
 import { toast } from "react-toastify";
 
-const ProductCard = ({
-  product: { id, name, thumbnail, price, User: user, Model: model },
-}) => {
+import ProductDropdown from "./ProductDropdown";
+
+const ProductCard = ({ product }) => {
+  const { id, name, thumbnail, price, User: user, Model: model } = product;
   const me = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  const handleClickDeleted = () => {
-    dispatch(deleteProduct(id));
-  };
-
   const handleClickAdd = () => {
     if (!me) {
-     return toast.error('Please login to continue')
+      return toast.error("Please login to continue");
     }
     dispatch(addToCart({ productId: id, price, amount: 1 }));
   };
@@ -26,13 +22,8 @@ const ProductCard = ({
   return (
     <div className="col">
       <div className="card shadow-sm">
-        <button
-          type="button"
-          className={`position-absolute top-0 end-0 m-2 btn-close ${
-            user.id === me?.id ? "" : "d-none"
-          }`}
-          onClick={handleClickDeleted}
-        ></button>
+        {user.id === me?.id && <ProductDropdown product={product} />}
+
         <div
           style={{ height: "225px" }}
           className="d-flex justify-content-center bd-placeholder-img card-img-top"
@@ -52,8 +43,11 @@ const ProductCard = ({
           </div>
 
           <div className="d-flex justify-content-between align-items-center">
-            <Link className="text-decoration-none" to={`/`}>
-              <Avatar size="40" src={API_ENDPOINT_URL + user.profileImage} />
+            <Link className="text-decoration-none" to={`/profile/${user.id}`}>
+              <Avatar
+                size="40"
+                src={user.profileImage && API_ENDPOINT_URL + user.profileImage}
+              />
               <small className="px-3 text-muted">
                 {`${user.firstName} ${user.lastName}`}
               </small>

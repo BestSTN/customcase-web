@@ -4,15 +4,19 @@ import DesignContent from "../features/design/DesignContent";
 import DesignForm from "../features/design/DesignForm";
 import { createProduct } from "../redux/productSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const DesignPage = () => {
   const [input, setInput] = useState({
     name: "iphone14",
-    price: "",
-    modelId: 1,
+    price: "300",
+    description: "",
+    modelId: 2,
     image: null,
     thumbnail: null,
   });
+
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
 
@@ -31,30 +35,31 @@ const DesignPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if(!user) {
-        return toast.error('Please login before continue.')
+      if (!user) {
+        return toast.error("Please login before continue.");
       }
-      
+
       if (!input.name || !input.price) {
         return toast.error("title and price is required");
       }
-      
+
       if (!input.image || !input.thumbnail) {
         return toast.error("image is required");
       }
       const formData = new FormData();
-      
+
       for (let key in input) {
         formData.append(`${key}`, input[key]);
       }
       dispatch(createProduct(formData));
       setInput({
         name: "iphone14",
-        price: "",
-        modelId: 1,
+        price: "300",
+        modelId: 2,
         image: null,
         thumbnail: null,
       });
+      navigate("/community");
     } catch (err) {
       toast.error(err.response?.data.message);
     }

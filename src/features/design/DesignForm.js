@@ -56,6 +56,22 @@ const DesignForm = ({ input, handleSubmit, handleChangeInput }) => {
           onChange={handleChangeInput}
         />
       </div>
+
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">
+          Description
+        </label>
+        <textarea
+          type="text"
+          className="form-control"
+          id="description"
+          name="description"
+          rows="7 "
+          value={input.description}
+          onChange={handleChangeInput}
+        />
+      </div>
+
       <div className="mb-3">
         <label htmlFor="price" className="form-label">
           Price
@@ -65,10 +81,11 @@ const DesignForm = ({ input, handleSubmit, handleChangeInput }) => {
           className="form-control"
           id="price"
           name="price"
-          min='100'
-          placeHolder='commission cost ฿ 100'
+          // min="100"
+          // placeholder="commission cost ฿ 100"
           value={input.price}
           onChange={handleChangeInput}
+          disabled
         />
       </div>
 

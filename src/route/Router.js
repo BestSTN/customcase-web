@@ -5,8 +5,11 @@ import DesignPage from "../pages/DesignPage";
 import CommunityPage from "../pages/CommunityPage";
 import ProfilePage from "../pages/ProfilePage";
 import CartPage from "../pages/CartPage";
+import AdminPage from "../pages/AdminPage";
+import { useSelector } from "react-redux";
 
 function Router() {
+  const user = useSelector((state) => state.auth.user);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -15,6 +18,9 @@ function Router() {
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/cart" element={<CartPage />} />
+        {user?.role === "ADMIN" && (
+          <Route path="/admin" element={<AdminPage />} />
+        )}
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
